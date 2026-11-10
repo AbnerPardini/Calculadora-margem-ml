@@ -1,5 +1,9 @@
 # Calculadora de Margem ML
 
+<p align="center">
+  <img src="banner-calculadora-ml.png.jpg" alt="Calculadora de Margem ML" width="100%">
+</p>
+
 **Uma ferramenta web para auxiliar vendedores do Mercado Livre na análise de custos, cálculo de tarifas e formação de preços de venda.**
 
 O objetivo deste projeto é desenvolver uma aplicação que facilite o planejamento financeiro de vendedores que utilizam o Mercado Livre, permitindo simular operações comerciais e compreender a rentabilidade real de cada venda.
