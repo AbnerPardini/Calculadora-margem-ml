@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de margem de lucro para vendedores do Mercado Livre. Simule taxas, custos, lucro e preço ideal.">
+    <title>Calculadora de Margem ML</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Calculadora de Margem ML</h1>
+        <p>
+            Calcule seus custos, tarifas e lucro antes de anunciar
+            seus produtos no Mercado Livre.
+        </p>
+    </header>
+
+    <main>
+
+        <!-- SIMULADOR DE VENDA -->
+        <section class="calculadora">
+
+            <h2>Simular uma venda</h2>
+
+            <div class="campo">
+                <label for="tipoAnuncio">Tipo de anúncio</label>
+                <select id="tipoAnuncio">
+                    <option value="manual">Manual</option>
+                    <option value="classico">Clássico</option>
+                    <option value="premium">Premium</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="categoriaProduto">Categoria do produto</label>
+                <select id="categoriaProduto">
+                    <option value="">Selecione uma categoria</option>
+                    <option value="veiculos">Acessórios para Veículos</option>
+                    <option value="agro">Agro</option>
+                    <option value="alimentos">Alimentos e Bebidas</option>
+                    <option value="antiguidades">Antiguidades e Coleções</option>
+                    <option value="bebe">Bebês</option>
+                    <option value="beleza">Beleza e Cuidados Pessoais</option>
+                    <option value="casa">Casa, Móveis e Decoração</option>
+                    <option value="esportes">Esportes e Fitness</option>
+                </select>
+            </div>
+
+            <p id="avisoModalidade">
+                Na modalidade manual, informe a tarifa de venda
+                aplicada ao seu anúncio.
+            </p>
+
+            <div class="campo">
+                <label for="preco">Preço de venda (R$)</label>
+                <input
+                    type="number"
+                    id="preco"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 200,00">
+            </div>
+
+            <div class="campo">
+                <label for="custo">Custo do produto (R$)</label>
+                <input
+                    type="number"
+                    id="custo"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 100,00">
+            </div>
+
+            <div class="campo">
+                <label for="tarifa">Tarifa do anúncio (%)</label>
+                <input
+                    type="number"
+                    id="tarifa"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Ex.: 14">
+            </div>
+
+            <div class="campo">
+                <label for="descontoCategoria">
+                    Desconto da categoria (pontos percentuais)
+                </label>
+                <input
+                    type="number"
+                    id="descontoCategoria"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    value="0"
+                    placeholder="Ex.: 3">
+            </div>
+
+            <div class="campo">
+                <label for="taxaFixa">Taxa fixa por venda (R$)</label>
+                <input
+                    id="taxaFixa"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="0"
+                    placeholder="Ex.: 6,00">
+
+                <p>
+                    Informe a taxa fixa aplicada à venda.
+                    Caso não exista, mantenha 0.
+                </p>
+            </div>
+
+            <div class="campo">
+                <label for="frete">Custo do frete (R$)</label>
+                <input
+                    type="number"
+                    id="frete"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 10,00">
+            </div>
+
+            <div class="campo">
+                <label for="outrosCustos">Outros custos (R$)</label>
+                <input
+                    type="number"
+                    id="outrosCustos"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 5,00">
+            </div>
+
+            <button id="calcular" type="button">
+                Calcular resultado
+            </button>
+
+            <div id="resultado" style="display: none;">
+
+                <h3>Resultado da simulação</h3>
+
+                <p id="mensagemResultado"></p>
+
+                <div class="painel-resultados">
+
+                    <div class="indicador">
+                        <span>Lucro líquido</span>
+                        <strong id="valorLucro">R$ 0,00</strong>
+                    </div>
+
+                    <div class="indicador">
+                        <span>Margem de lucro</span>
+                        <strong id="valorMargem">0,00%</strong>
+                    </div>
+
+                    <div class="indicador">
+                        <span>Tarifa do anúncio</span>
+                        <strong id="valorTarifa">R$ 0,00</strong>
+                    </div>
+
+                    <div class="indicador">
+                        <span>Taxa fixa por venda</span>
+                        <strong id="valorTaxaFixa">R$ 0,00</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALCULADORA DE PREÇO IDEAL -->
+        <section class="calculadora">
+
+            <h2>Calcular preço ideal</h2>
+
+            <p>
+                Descubra por quanto você deve vender seu produto
+                para alcançar a margem de lucro desejada.
+            </p>
+
+            <div class="campo">
+                <label for="custoIdeal">Custo do produto (R$)</label>
+                <input
+                    type="number"
+                    id="custoIdeal"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 100,00">
+            </div>
+
+            <div class="campo">
+                <label for="tarifaIdeal">Tarifa do anúncio (%)</label>
+                <input
+                    type="number"
+                    id="tarifaIdeal"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Ex.: 14">
+            </div>
+
+            <div class="campo">
+                <label for="freteIdeal">Custo do frete (R$)</label>
+                <input
+                    type="number"
+                    id="freteIdeal"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 10,00">
+            </div>
+
+            <div class="campo">
+                <label for="outrosCustosIdeal">Outros custos (R$)</label>
+                <input
+                    type="number"
+                    id="outrosCustosIdeal"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ex.: 5,00">
+            </div>
+
+            <div class="campo">
+                <label for="margemDesejada">
+                    Margem de lucro desejada (%)
+                </label>
+                <input
+                    type="number"
+                    id="margemDesejada"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="Ex.: 30">
+            </div>
+
+            <button id="calcularPrecoIdeal" type="button">
+                Calcular preço ideal
+            </button>
+
+            <div id="resultadoPrecoIdeal" style="display: none;">
+
+                <h3>Resultado do preço ideal</h3>
+
+                <p id="mensagemPrecoIdeal"></p>
+
+                <div id="painelPrecoIdeal">
+
+                    <div class="indicador">
+                        <span>Preço de venda recomendado</span>
+                        <strong id="valorPrecoIdeal">R$ 0,00</strong>
+                    </div>
+
+                    <div class="indicador">
+                        <span>Lucro estimado</span>
+                        <strong id="lucroEstimadoIdeal">R$ 0,00</strong>
+                    </div>
+
+                    <div class="indicador">
+                        <span>Margem estimada</span>
+                        <strong id="margemEstimadaIdeal">0,00%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            Calculadora de Margem ML
+        </p>
+        <p>
+            Ferramenta independente para simulação de custos e resultados.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
